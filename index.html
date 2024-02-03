@@ -3,95 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-    <link rel = "stylesheet" href = "style.css" />
-    <title>Music player</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
 </head>
 <body>
-    
-    <div class="container">
-        <aside class="sidebar">
-            <div class="logo">
-                <i class='bx bx-pulse'></i>
-                <a href = '#'>Music Player</a>
+    <nav>
+        <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/033/original/SST_Logo.png?1706888781" alt="logo">
+        <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/032/original/scaler-social.png?1706888764" alt="logo">
+    </nav>
+    <div class = "container">
+        <div class = "text">
+            <h2>Post your thoughts here</h2>
+            <div class="form">
+                <div class="formc">
+                    <div class="upper">
+                    <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/031/original/profile_image.png?1706888739" alt="icon">
+                    <textarea id="txt" rows="5" cols="40" name="Text" placeholder="Type your thoughts here...."></textarea>
+                    </div>
+                    <div class="lower">
+                        <p>0/100</p>
+                        <button id="btn" onclick="func();">post</button>
+                    </div>
+                </div>
             </div>
-
-            <div class="menu">
-                <h5>Menu</h5>
-                <ul>
-                    <li>
-                        <i class = 'bx bxs-bolt-circle'></i>
-                        <a href="" herf="#">Explore</a>
-                    </li>
-                    <li>
-                        <i class = 'bx bxs-volume-full'></i>
-                        <a href="" herf="#">Generes</a>
-                    </li>
-                    <li>
-                        <i class = 'bx bxs-album'></i>
-                        <a href="" herf="#">Albums</a>
-                    </li>
-                    <li>
-                        <i class = 'bx bxs-microphone'></i>
-                        <a href="" herf="#">Artists</a>
-                    </li>
-                    <li>
-                        <i class = 'bx bxs-radio'></i>
-                        <a href="" herf="#">Podcasts</a>
-                    </li>
-                </ul>
+        </div>
+        <div id ="lc" class = "feed">
+            <h1>Your feed</h1>
+            <div class = comment>
+                <div class="top">
+                    <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/031/original/profile_image.png?1706888739" alt="icon">
+                    <p>@osmeging</p>
+                    <img id="edit" src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/028/original/edit.png?1706888661" alt ="edit">
+                    <img id="del" onclick="func3()" src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/027/original/delete.png?1706888643" alt="del">
+                    <br>
+                    <div class="middle">
+                        <p>Lorum</p>
+                    </div>
+                    <br>
+                    <div class="bottom">
+                        <img id="comment" src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/026/original/comment.png?1706888619" alt ="comment">
+                        <img id="like" onclick="func2();" src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/029/original/heart.png?1706888679" alt="like">
+                    </div>
+                </div>
             </div>
-
-            <div class="menu">
-                <h5>Library</h5>
-                <ul>
-                    <li>
-                        <i class = 'bx bxs-bolt-undo'></i>
-                        <a href="" herf="#">Recent</a>
-                    </li>
-                    <li>
-                        <i class = 'bx bxs-volume-photo-album'></i>
-                        <a href="" herf="#">Albumns</a>
-                    </li>
-                    <li>
-                        <i class = 'bx bxs-heart'></i>
-                        <a href="" herf="#">Favourites</a>
-                    </li>
-                    <li>
-                        <i class = 'bx bxs-folder'></i>
-                        <a href="" herf="#">Local</a>
-                    </li>
-                    
-                </ul>
-            </div>
-
-            <div class="menu">
-                <h5>playList</h5>
-                <ul>
-                    <li>
-                        <i class = 'bx bxs-bolt-plus-square'></i>
-                        <a href="" herf="#">Create New</a>
-                    </li>
-                    <li>
-                        <i class = 'bx bxs-caret-right-circle'></i>
-                        <a href="" herf="#">Best of 2024</a>
-                    </li>
-                    <li>
-                        <i class = 'bx bxs-caret-right-circle'></i>
-                        <a href="" herf="#">Best of 2023</a>
-                    </li>
-                    <li>
-                        <i class = 'bx bxs-caret-right-circle'></i>
-                        <a href="" herf="#">Tony Stark</a>
-                    </li>
-                    
-                </ul>
-            </div>
-        </aside>
+        </div>
     </div>
-
-    <script src = "script.js"></script>
+    <div id="del-box" class="delete-box">
+        <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/030/original/delete-color-filled.png?1706888714" alt="del-solid">
+        <h2>Are you sure you want to permanently delete this tweet?</h2>
+        <div class="cldl">
+            <button id="cl">cancel</button>
+            <button id="dl">delete</button>
+        </div>
+    </div>
+    <script>
+    function func(){
+        var element = document.createElement("div");
+        var text = document.getElementById("txt").value
+        element.appendChild(document.createTextNode(text));
+        document.getElementById('lc').appendChild(element);
+        document.getElementById("txt").value="";
+    };  
+    function func2(){
+        let element = document.getElementById( "like" );
+        if(element["src"]=="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/025/original/state_clicked.png?1706888455"){
+            element.src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/029/original/heart.png?1706888679";
+        }
+        else{
+            element.src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/025/original/state_clicked.png?1706888455";
+        }
+    }
+    function func3(){
+        let el = document.getElementById("del-box");
+        if(el["style"]["display"] == "none"){
+            el.style.display = "block";
+        }
+        else{
+            el.style.display = "none"
+        }
+    }
+    </script>
 </body>
 </html>
-thofgsdhhhf
