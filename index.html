@@ -11,40 +11,24 @@
         <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/033/original/SST_Logo.png?1706888781" alt="logo">
         <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/032/original/scaler-social.png?1706888764" alt="logo">
     </nav>
-    <div class = "container">
-        <div class = "text">
+    <div class="container">
+        <div class="text">
             <h2>Post your thoughts here</h2>
             <div class="form">
                 <div class="formc">
                     <div class="upper">
-                    <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/031/original/profile_image.png?1706888739" alt="icon">
-                    <textarea id="txt" rows="5" cols="40" name="Text" placeholder="Type your thoughts here...."></textarea>
+                        <img  src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/031/original/profile_image.png?1706888739" alt="icon">
+                        <textarea id="txt" rows="5" cols="40" name="Text" placeholder="Type your thoughts here...."></textarea>
                     </div>
                     <div class="lower">
-                        <p>0/100</p>
-                        <button id="btn" onclick="func();">post</button>
+                        <button id="btn">post</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div id ="lc" class = "feed">
+        <div id="lc" class="feed">
             <h1>Your feed</h1>
-            <div class = comment>
-                <div class="top">
-                    <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/031/original/profile_image.png?1706888739" alt="icon">
-                    <p>@osmeging</p>
-                    <img id="edit" src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/028/original/edit.png?1706888661" alt ="edit">
-                    <img id="del" onclick="func3()" src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/027/original/delete.png?1706888643" alt="del">
-                    <br>
-                    <div class="middle">
-                        <p>Lorum</p>
-                    </div>
-                    <br>
-                    <div class="bottom">
-                        <img id="comment" src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/026/original/comment.png?1706888619" alt ="comment">
-                        <img id="like" onclick="func2();" src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/029/original/heart.png?1706888679" alt="like">
-                    </div>
-                </div>
+            <div class="lc-main">
             </div>
         </div>
     </div>
@@ -57,31 +41,56 @@
         </div>
     </div>
     <script>
-    function func(){
-        var element = document.createElement("div");
-        var text = document.getElementById("txt").value
-        element.appendChild(document.createTextNode(text));
-        document.getElementById('lc').appendChild(element);
-        document.getElementById("txt").value="";
-    };  
-    function func2(){
-        let element = document.getElementById( "like" );
-        if(element["src"]=="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/025/original/state_clicked.png?1706888455"){
-            element.src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/029/original/heart.png?1706888679";
+
+        document.getElementById("btn").addEventListener("click", function() {
+            var element = document.createElement("div");
+            var text = document.getElementById("txt").value;
+            document.getElementById("txt").value = "";
+
+            let commentt = document.querySelector(".lc-main");
+            commentt.innerHTML+=`
+            <div class="comment">
+                    
+                    <div class="top">
+                        <img id="imgg" src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/031/original/profile_image.png?1706888739" alt="icon">
+                        <p id="text">${text}</p>
+                        <img id="edit" onclick="edit(event)" src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/028/original/edit.png?1706888661" alt="edit">
+                        <img id="del" onclick="deletee(event)" src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/027/original/delete.png?1706888643" alt="del">
+                        <div class="middle">
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <img id="comment" src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/026/original/comment.png?1706888619" alt="comment">
+                        <img id="like" onclick="func2(event)" src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/029/original/heart.png?1706888679" alt="like">
+                    </div>
+                </div>
+                `;
+
+            // let comment = 
+        });
+
+        // document.getElementById("like").addEventListener("click", aa );
+
+        function func2(e) {
+            if (e.target.src == "https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/025/original/state_clicked.png?1706888455") {
+                e.target.src = "https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/029/original/heart.png?1706888679";
+            } else {
+                e.target.src = "https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/025/original/state_clicked.png?1706888455";
+            }
         }
-        else{
-            element.src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/025/original/state_clicked.png?1706888455";
+
+        function deletee(e){
+            var a = confirm('Do You Want to delete');
+            if(a)
+                e.target.parentNode.parentNode.remove();
         }
-    }
-    function func3(){
-        let el = document.getElementById("del-box");
-        if(el["style"]["display"] == "none"){
-            el.style.display = "block";
+
+        function edit(e){
+            var elem = e.target.parentNode.querySelector('#text');
+            var new_text =  prompt('Enter text New Text To replace');
+            elem.innerHTML=new_text;
         }
-        else{
-            el.style.display = "none"
-        }
-    }
+
     </script>
 </body>
 </html>
